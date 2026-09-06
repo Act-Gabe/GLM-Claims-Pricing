@@ -26,7 +26,7 @@ cor(freq_clean$pred_pure_premium, freq_clean$pred_sev)
 #DrivAge has been a significant predictor in both(correlating both) so they seem equally correlated to premium cz of that
 cor(freq_clean$pred_freq, freq_clean$pred_sev)
 # 0.121 is very low so there is little correlation betwen freq and sev
-#Let's check the spread on each factor
+#Checking the spread on each factor
 sd(freq_clean$pred_freq) / mean(freq_clean$pred_freq)
 sd(freq_clean$pred_sev) / mean(freq_clean$pred_sev)
 # freq has a larger spread hence having a higher effect on pred premium. 

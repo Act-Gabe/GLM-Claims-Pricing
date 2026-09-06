@@ -39,11 +39,11 @@ cat("\n% of policies with at least one claim:",
 
 # A very small number of policies have Exposure > 1 (data entry errors — a
 # policy can't be observed for more than 1 year here) and a handful have an
-# implausibly high ClaimNb. We'll cap these in Session 2 before modelling.
+# implausibly high ClaimNb. 
 cat("\nPolicies with Exposure > 1:", sum(freq$Exposure > 1), "\n")
 cat("Max ClaimNb observed:", max(freq$ClaimNb), "\n")
 
-# ---- 6. Quick visual: does claim frequency rise with BonusMalus? ----
+# ---- 6. Does claim frequency rise with BonusMalus? ----
 # (BonusMalus is France's no-claims bonus/malus score — higher = worse history)
 freq %>%
   mutate(bm_band = cut(BonusMalus, breaks = c(50, 60, 80, 100, 130, 350))) %>%
@@ -56,7 +56,6 @@ freq_clean <- freq %>%
   mutate(Exposure = pmin(Exposure, 1))
 
 # Cap ClaimNb at a sensible max — 4 claims/year is already extreme;
-# anything above is almost certainly a data error, so we cap rather than delete
 freq_clean <- freq_clean %>%
   mutate(ClaimNb = pmin(ClaimNb, 4))
 
@@ -69,7 +68,7 @@ freq_clean <- freq_clean %>%
     Region   = as.factor(Region)
   )
 
-# Confirm the fix worked
+
 summary(freq_clean$Exposure)
 summary(freq_clean$ClaimNb)
 
